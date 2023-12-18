@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoBooth</title>
+    <link type="text/css" href="/css/styles.css" rel="stylesheet">
+    <link type="text/css" href="/css/album.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#222a68">
+</head>
+<body id="albumBg">
+    <h class="photobooth">PhotoBooth</h>
+    <div class="album">
+     <h class="welcome">Welcome to the party album!</h>
+     <div class="pictures">
+     </div>
+    </div>
+    <button id="takePhotoButton" class="floating-button">Take a photo!</button>
+
+    <div class="popup-wrapper" id="popup-wrapper" style="display: none;">
+     <div class="popup" id="popup">
+        <span class="close-btn">&times;</span>
+        <div class="popup-content">
+            <video id="cameraFeed" width="100%" height="auto" autoplay style="display: none;"></video>
+            <canvas id="capturedCanvas" style="display: none;"></canvas>
+            <button id="captureButton" style="display: none;">Take a Photo</button>
+            <button id="retakeButton" style="display: none;">Retake a Photo</button>
+            <input type="text" id="noteInput" placeholder="Enter your note" style="display: none;">
+            <button id="saveButton" style="display: none;">Save</button>
+        </div>
+     </div>
+    </div>
+
+    <div class="popup-wrapper-file" id="popup-wrapper-file" style="display: none;">
+        <div class="popup" id="popup">
+           <span class="close-btn-file">&times;</span>
+           <div class="popup-content">
+               <input type="file" id="choose"></button>
+               <input type="text" id="noteInput-file" placeholder="Enter your note">
+               <button id="saveButton-file">Save</button>
+           </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js"></script> 
+    <script>
+      // Initialize Firebase
+      const config = {
+        apiKey: "AIzaSyBuL9oA-Y_xp3X6vxnJZzqUZ2rTxtODauE",
+        authDomain: "photobooth-4a827.firebaseapp.com",
+        projectId: "photobooth-4a827",
+        storageBucket: "photobooth-4a827.appspot.com",
+        messagingSenderId: "657662202228",
+        appId: "1:657662202228:web:17a2aad0824504e2f41c21",
+        measurementId: "G-QF81ZFHM8Z"
+      };
+      firebase.initializeApp(config);
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+      const storageRef = storage.ref();
+    </script>
+    <script type="module" src="/js/app.js"></script>
+    <script type="module" src="/js/albumDisplay.js"></script>
+    <script type="module" src="/js/db.js"></script>
+    <script type="module" src="/js/albumUI.js"></script>
+</body>
+</html>

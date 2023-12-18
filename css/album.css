@@ -1,0 +1,177 @@
+.album {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0;
+}
+
+#albumBg {
+    background-color: rgb(28, 28, 28);
+}
+
+.pictures {
+   display: flex;
+   flex-direction:row;
+   flex-wrap: wrap;
+   padding: 2rem 1rem;
+   align-self: center;
+   justify-content: flex-start;
+}
+
+.picture {
+    padding-bottom: 10;
+    margin: 0.5rem;
+    border-radius: 9px;
+    height: 14rem;
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:end;
+    background-color: white;
+}
+
+.picture:hover {
+    scale: 1.05;
+}
+
+.picture > img {
+    width: 100%;
+    height: 82%; 
+    display: block;
+    border-radius: 9px 9px 0 0;
+}
+
+.picture > p {
+    font-family: Papyrus, sans-serif;
+    color: #222a68;
+    margin-bottom: 0;
+    text-wrap: wrap;
+    font-weight: bold;
+}
+
+.welcome {
+    color: #FF495C;
+    font-weight: bold;
+    text-align: start;
+    font-size: large;
+    margin-left: 2rem;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 999; 
+    padding: 10px 20px; 
+    background-color: #FF495C; 
+    color: #ffffff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+}
+
+.floating-button:hover {
+    background-color: #d64c59; 
+}
+
+/* CSS camera */
+.popup-wrapper, .popup-wrapper-file {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    position: relative; 
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.close-btn, .close-btn-file {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #555; 
+}
+
+#captureButton, #retakeButton {
+    padding: 5px 10px; 
+    background-color: #222a68;
+    color: #ffffff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:medium;  
+    margin-block: 1rem;
+    margin-inline: auto;
+}
+
+#captureButton:hover, #saveButton:hover, #retakeButton:hover, #saveButton-file:hover {
+    background-color: #36429a;
+
+}
+
+#saveButton, #saveButton-file {
+    width: 52px; 
+    height: 50px; 
+    border-radius: 50%; 
+    border: none;
+    background-color: #222a68;; 
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+#noteInput, #noteInput-file {
+    border-radius: 18px;
+    padding: 10px;
+    width: 90%;
+    margin-block: 0.5rem;
+    border: 1px solid rgb(191, 189, 189);
+    outline: none;
+}
+
+@media (max-width: 767px) {
+    .pictures {
+        justify-content: center;
+    }
+
+    .popup {
+        width: 85%;
+    }
+
+    #cameraFeed {
+       width: 90%;
+    }
+
+    #noteInput, #noteInput-file {
+        width: 80%;
+    }
+
+    #capturedCanvas {
+        width:-webkit-fill-available;
+    }
+}

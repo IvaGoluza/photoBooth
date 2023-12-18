@@ -1,0 +1,68 @@
+{
+    "name": "PhotoBooth",
+    "short_name": "PhotoB",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#c2d8fc",
+    "theme_color": "#222a68",
+    "orientatioin": "portrait-primary",
+    "icons": [
+        {
+          "src": "/img/icons/icon-72x72.png",
+          "type": "image/png",
+          "sizes": "72x72"
+        },
+        {
+          "src": "/img/icons/icon-96x96.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "/img/icons/icon-128x128.png",
+          "type": "image/png",
+          "sizes": "128x128"
+        },
+        {
+          "src": "/img/icons/icon-144x144.png",
+          "type": "image/png",
+          "sizes": "144x144"
+        },
+        {
+          "src": "/img/icons/icon-152x152.png",
+          "type": "image/png",
+          "sizes": "152x152"
+        },
+        {
+          "src": "/img/icons/icon-192x192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+          "src": "/img/icons/icon-384x384.png",
+          "type": "image/png",
+          "sizes": "384x384"
+        },
+        {
+          "src": "/img/icons/icon-512x512.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "img/screenshots/screenshot-desktop.png",
+            "sizes": "2880x1523",
+            "type": "image/png",
+            "purpose": "any",
+            "form_factor": "wide"
+        },
+        {
+            "src": "img/screenshots/screenshot-mobile.png", 
+            "sizes": "620x1228",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    
+    ],
+    "description": "Enrich your party with a photobooth. Save memories in pictures."
+}

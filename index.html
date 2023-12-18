@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoBooth</title>
+    <link type="text/css" href="/css/styles.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#222a68">
+</head>
+</head>
+<body>
+   <h class="photobooth">PhotoBooth</h>
+   <div id="options">
+    <div id="option">
+        <h>Join the fun with an invite key</h>
+        <input type="text" id="partyKey">
+        <button id="sendKey">Let's party!</button>
+    </div>
+    <div id="option">
+        <h>Or create your own party name and get a key</h>
+        <input type="text" id="partyName">
+        <button id="getKey">Create party!</button>
+    </div>
+    <div id="illustration">
+        <img src="img/illustration.png" alt="PhotoBooth Image" class="photobooth-image">
+        <p>Enrich your party with a photobooth. Save memories in pictures.</p>
+    </div>
+   </div>
+  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js"></script> 
+  <script>
+    // Initialize Firebase
+    const config = {
+      apiKey: "AIzaSyBuL9oA-Y_xp3X6vxnJZzqUZ2rTxtODauE",
+      authDomain: "photobooth-4a827.firebaseapp.com",
+      projectId: "photobooth-4a827",
+      storageBucket: "photobooth-4a827.appspot.com",
+      messagingSenderId: "657662202228",
+      appId: "1:657662202228:web:17a2aad0824504e2f41c21",
+      measurementId: "G-QF81ZFHM8Z"
+    };
+    firebase.initializeApp(config);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+  </script>
+  <script type="module" src="/js/app.js"></script>
+  <script type="module" src="/js/db.js"></script>
+  <script type="module" src="/js/homeUI.js"></script>
+</body>
+</html>
