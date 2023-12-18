@@ -1,9 +1,3 @@
-import {
-    del,
-    entries
-} from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
-
-
 const staticCacheConstant = 'static-cache';
 const dynamicCacheConstant = 'dynamic-cache';
 
@@ -19,7 +13,6 @@ const assets = [
     'https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js',
     'https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js',
-    'https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm'
 ];
 
 // limit cash size -> if it is full, delete the oldest cashes 
@@ -28,7 +21,7 @@ const limitCashSize = (name, size) => {           // name of the cashe and max s
     caches.open(name).then(cache => {
         cache.keys().then(keys => {
             if(keys.length > size) {
-                cache.delete(keys[0]).then(limitCashSize(name, size));  // call until all of the excess caches have been deleted 
+                cache.delete(keys[0]).then(limitCashSize(name, size));  
             }
         })
     })
@@ -38,7 +31,7 @@ const limitCacheSize = (name, size) => {
     caches.open(name).then(cache => {
       cache.keys().then(keys => {
         if(keys.length > size){
-          cache.delete(keys[0]).then(limitCacheSize(name, size));
+          cache.delete(keys[0]).then(limitCacheSize(name, size));  // call until all of the excess caches have been deleted 
         }
       });
     });
@@ -122,46 +115,3 @@ self.addEventListener('fetch', evt => {
         );
     }
 });
-
-self.addEventListener('sync', function (event) {
-    console.log(event.tag);
-    if (event.tag === 'sync-snaps') {
-        console.log('hii');
-        event.waitUntil(syncSnaps());
-    }
-});
-
-let syncSnaps = async function () {
-    console.log('hii');
-    entries()
-        .then((entries) => {
-            entries.forEach((entry) => {
-                let snap = entry[1]; //  Each entry is an array of [key, value].
-                const timestamp = Date.now();
-                const randomID = Math.random().toString(36).substring(2, 8); 
-                const filename = `photo-${timestamp}-${randomID}.jpg`;             
-
-                const uploadTask = storageRef.child('images/' + filename).put(snap.image);
-
-                // getting downloadURL after the image is uploaded
-                uploadTask.then(snapshot => {
-                    return snapshot.ref.getDownloadURL();
-                }).then(downloadURL => {
-                    db.collection('pictures').add({    // save document to Firestore with image URL, note and partyKey
-                        imageURL: downloadURL,
-                        note: note,
-                        partyKey: partyKey,
-                    }).then(() => {
-                        console.log('Data saved to Firestore');
-                        del(entry[0])
-                    }).catch(error => {
-                        console.error('Error saving data:', error);
-                    });
-                }).catch(error => {
-                    console.error('Error uploading image:', error);
-                });
-            })
-        });
-}
-
-

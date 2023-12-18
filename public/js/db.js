@@ -74,41 +74,6 @@ export const savePartyImage = async (imageDataURL, note, partyKey) => {
     });
 };
 
-export const savePartyImageToLocalDB = async (imageDataURL, note, partyKey) => {
-    try {
-        // Generate a unique key for each entry (e.g., using timestamp or UUID)
-        const entryKey = `id_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
 
-        // Store the data locally in IndexedDB using idb-keyval with unique entryKey
-        await idbKeyval.set(entryKey, {
-            imageDataURL: imageDataURL,
-            note: note,
-            partyKey: partyKey,
-        });
-
-        console.log('Data saved to IndexedDB with key:', entryKey);
-    } catch (error) {
-        console.error('Error saving data to IndexedDB:', error);
-    }
-};
-
-// Function to retrieve all entries from IndexedDB
-export const getAllEntriesFromLocalDB = async () => {
-    try {
-        const keys = await idbKeyval.keys(); // Get all keys stored in IndexedDB
-        const entries = [];
-
-        // Retrieve data for each key
-        for (const key of keys) {
-            const data = await idbKeyval.get(key);
-            entries.push({ key: key, data: data }); // Store the key along with the data
-        }
-
-        return entries;
-    } catch (error) {
-        console.error('Error retrieving data from IndexedDB:', error);
-        return [];
-    }
-};
 
 

@@ -1,10 +1,7 @@
-import { savePartyImage, savePartyImageToLocalDB } from './db.js'; 
-import {
-    set,
-} from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
-
+import { savePartyImage } from './db.js'; 
 
 // camera functionality
+
 document.getElementById('takePhotoButton').addEventListener('click', function() {
     const popup = document.getElementById('popup-wrapper');
 
@@ -78,55 +75,31 @@ document.getElementById('takePhotoButton').addEventListener('click', function() 
             }
         });
 
+        let saveButtonClicked = false;
         saveButton.addEventListener('click', function() {
-            const note = noteInput.value;
-            const imageDataURL = canvas.toDataURL('image/png');
-            const url = new URL(window.location.href);
-            const params = new URLSearchParams(url.search);
-            const partyKey = params.get('pK');
-            
-            if ( "serviceWorker" in navigator && "SyncManager" in window ) {
-                fetch(imageDataURL)
-                    .then((res) => res.blob())
-                    .then((blob) => {
-                        let ts = new Date().toISOString();
-                        set(ts, {
-                            image: blob,
-                            imageDataURL: imageDataURL,
-                            note: note,
-                            partyKey: partyKey,
-                        });
-                        return navigator.serviceWorker.ready;
-                    })
-                    .then((swRegistration) => {
-                        console.log('here');
-                        return swRegistration.sync.register(
-                            "sync-snaps"
-                        );
-                    })
-                    .then(() => {
-                        console.log("Queued for sync");
-                        canvas.style.display = 'none';   // making sure that afterPicture elements are not displayed next time
-                        retakeButton.style.display = 'none'; 
-                        noteInput.value = '';
-                        noteInput.style.display = 'none';
-                        saveButton.style.display = 'none';
-                        popup.style.display = 'none'; 
-                        const stream = video.srcObject;
-                        if (stream) {
-                            const tracks = stream.getTracks();
-                            tracks.forEach(track => track.stop());
-                        }   
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            } else {
-                // fallback
-                // pokusati poslati, pa ako ima mreze onda dobro...
-                alert("TODO - vaš preglednik ne podržava bckg sync...");
-            }
+            if (!saveButtonClicked) {
+                saveButtonClicked = true;
+                const note = noteInput.value;
+                const imageDataURL = canvas.toDataURL('image/png');
+                const url = new URL(window.location.href);
+                const params = new URLSearchParams(url.search);
+                const partyKey = params.get('pK');
 
+                savePartyImage(imageDataURL, note, partyKey).then(() => {
+
+                    canvas.style.display = 'none';   // making sure that afterPicture elements are not displayed next time
+                    retakeButton.style.display = 'none'; 
+                    noteInput.value = '';
+                    noteInput.style.display = 'none';
+                    saveButton.style.display = 'none';
+                    popup.style.display = 'none'; 
+                    const stream = video.srcObject;
+                    if (stream) {
+                    const tracks = stream.getTracks();
+                    tracks.forEach(track => track.stop());
+                    }
+                })
+            }
         });
     } 
 });
