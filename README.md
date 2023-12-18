@@ -7,10 +7,10 @@
 deploy Firebase: https://photobooth-4a827.web.app/
   
 ### PWA app:
-  installable
-  cashing
-  offline app shell
-  using Navite API (camera)
+  installable,
+  cashing,
+  offline app shell,
+  using Navite API (camera),
   gracefull degradation (camera/file upload)
 
   
